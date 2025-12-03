@@ -25,34 +25,47 @@ function ChatBox() {
 
   const [freeMessagesLeft, setFreeMessagesLeft] = useState(5);
 
-  useEffect(() => {
+  function goto_book_video()
+  {
+    window.location.href="https://satyarishi.ai/"
+  }
+
+
+  useEffect(() => 
+  {
     setShowCartoon(true);
-    const interval = setInterval(() => {
+    const interval = setInterval(() => 
+    {
       setShowCartoon((prev) => !prev);
     }, 2000);
     return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
-    if (isOpen && isLoggedIn && timeLeft > 0 && !showSubscriptionPrompt) {
+    if (isOpen && isLoggedIn && timeLeft > 0 && !showSubscriptionPrompt) 
+    {
       const timer = setInterval(() => {
         setTimeLeft((prevTime) => prevTime - 1);
       }, 1000);
 
       return () => clearInterval(timer);
-    } else if (timeLeft === 0) {
+    } 
+    else if (timeLeft === 0) 
+    {
       setShowSubscriptionPrompt(true);
     }
   }, [isOpen, isLoggedIn, timeLeft, showSubscriptionPrompt]);
 
-  const formatTime = (seconds) => {
+  const formatTime = (seconds) => 
+  {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
   };
 
-  const resetAllLimits = () => {
-    setTimeLeft(120);
+  const resetAllLimits = () => 
+  {
+    setTimeLeft(300);
     setFreeMessagesLeft(5);
     setShowSubscriptionPrompt(false);
     setInChatAlert(null);
@@ -68,9 +81,7 @@ function ChatBox() {
         conversation!
       </p>
       <div className="alert-actions">
-        <button
-          className="confirm-btn"
-          onClick={() => {
+        <button className="confirm-btn" onClick={() => {
             setInChatAlert({
               type: "success",
               message: "Subscribed! Thank you for subscribing.",
@@ -81,6 +92,10 @@ function ChatBox() {
         >
           Get Subscription Now
         </button>
+        <button onClick={goto_book_video}>Book Video Session</button>
+        <button onClick={goto_book_video}>Book Audio Session</button>
+        <button onClick={goto_book_video}>Book Chat Session</button>
+
         <button
           className="cancel-btn"
           onClick={() => setShowSubscriptionPrompt(false)}
@@ -94,11 +109,13 @@ function ChatBox() {
   const handleSend = () => {
     if (!input.trim()) return;
 
-    const isLimitReached =
+      const isLimitReached =
       showSubscriptionPrompt || timeLeft === 0 || freeMessagesLeft <= 0;
 
-    if (isLimitReached) {
-      if (!showSubscriptionPrompt) {
+    if (isLimitReached) 
+      {
+       if (!showSubscriptionPrompt) 
+      {
         setShowSubscriptionPrompt(true);
       }
       return;
@@ -115,10 +132,12 @@ function ChatBox() {
 
     setFreeMessagesLeft((prevCount) => prevCount - 1);
 
-    setTimeout(() => {
+    setTimeout(() => 
+    {
       let botResponseText;
 
-      if (!isFirstMessageSent) {
+      if (!isFirstMessageSent) 
+      {
         botResponseText = (
           <>
             Thanks, {username}. Please enter your details for an astrological
@@ -134,14 +153,17 @@ function ChatBox() {
 
         setIsFirstMessageSent(true);
 
-        const botMessage = {
+        const botMessage = 
+        {
           sender: "bot",
           text: botResponseText,
         };
 
         setIsBotTyping(false);
         setMessages((prevMessages) => [...prevMessages, botMessage]);
-      } else {
+      }
+     else
+      {
         setIsBotTyping(false);
         setMessages((prevMessages) => [
           ...prevMessages,
@@ -152,14 +174,17 @@ function ChatBox() {
         ]);
       }
 
-      if (freeMessagesLeft - 1 <= 0) {
+      if (freeMessagesLeft - 1 <= 0) 
+      {
         setShowSubscriptionPrompt(true);
       }
     }, 2000);
   };
 
-  const openChat = () => {
-    if (!isLoggedIn) {
+  const openChat = () => 
+  {
+    if (!isLoggedIn) 
+    {
       setIsOpen(true);
       setShowLoginPopup(true);
       setShowCartoon(false);
@@ -170,27 +195,27 @@ function ChatBox() {
   };
 
   // ---------------- LOGIN ----------------
-  const handleLogin = () => {
+  const handleLogin = () => 
+  {
     setInChatAlert(null);
 
-    if (!username || !email || !password) {
+    if (!username || !email || !password) 
+    {
       setInChatAlert({ type: "error", message: "Please Fill All Fields" });
       return;
     }
-
     setInChatAlert({ type: "success", message: "Login Successful!" });
 
-    setTimeout(() => {
+    setTimeout(() => 
+    {
       setIsLoggedIn(true);
       setShowLoginPopup(false);
       setInChatAlert(null);
-
       resetAllLimits();
-
       setMessages([
         {
           sender: "bot",
-          text: `Welcome ${username}! How can I help you today? (You have 5 free messages and 2 minutes)`,
+          text: `Welcome ${username}! How can I help you today? (You have 5 free messages and 5 minutes)`,
         },
       ]);
       setIsFirstMessageSent(false);
@@ -198,9 +223,11 @@ function ChatBox() {
   };
 
   // ---------------- SIGNUP ----------------
-  const handleSignup = () => {
+  const handleSignup = () => 
+  {
     setInChatAlert(null);
-    if (!username || !email || !password) {
+   if (!username || !email || !password) 
+    {
       setInChatAlert({ type: "error", message: "Please Fill All Fields" });
       return;
     }
@@ -210,22 +237,26 @@ function ChatBox() {
       message: "Signup Successful! You can login now.",
     });
 
-    setTimeout(() => {
+    setTimeout(() => 
+    {
       setUsername("");
       setEmail("");
       setPassword("");
     }, 1500);
   };
 
-  function deal_now_fn() {
+  function deal_now_fn() 
+  {
     var prompt_value = prompt("ENTER YOUR CONTACT NUMBER");
-    if (prompt_value && prompt_value.length > 0) {
+    if (prompt_value && prompt_value.length > 0) 
+    {
       alert("TECH DILIGENTS TEAM WILL CONTACT YOU SOON...");
-    } else {
+    } 
+    else 
+    {
       alert("PLEASE ENTER YOUR CONTACT NUMBER");
     }
   }
-
   return (
     <>
       {/* NAVBAR */}
@@ -256,12 +287,7 @@ function ChatBox() {
           {[1, 2, 3, 4].map((item) => (
             <div key={item} className="product-card">
               <div className="product-img">
-                <img
-                  src={IMG}
-                  width="250px"
-                  height="150px"
-                  alt={`Project ${item}`}
-                />
+                <img src={IMG} width="250px" height="150px" alt={`Project ${item}`}/>
               </div>
               <h3>Project {item}</h3>
               <p>$49.99</p>
@@ -321,7 +347,7 @@ function ChatBox() {
               >
                 <span
                   style={{
-                    color: timeLeft < 30 ? "red" : "cyan",
+                    color: timeLeft < 11 ? "red" : "white",
                     fontWeight: "bold",
                   }}
                 >
@@ -329,7 +355,7 @@ function ChatBox() {
                 </span>
                 <span
                   style={{
-                    color: freeMessagesLeft <= 1 ? "yellow" : "white",
+                    color: freeMessagesLeft <= 1 ? "red" : "white",
                     fontWeight: "bold",
                   }}
                 >
@@ -339,23 +365,30 @@ function ChatBox() {
             )}
 
             {/* NEW CHAT BUTTON */}
-            <button
-              className="new-chat-btn"
-              onClick={() => {
-                resetAllLimits();
-                setMessages([
-                  {
-                    sender: "bot",
-                    text: `Welcome ${username}! How can I help you today? (You have 5 free messages and 2 minutes)`,
-                  },
-                ]);
-                setIsFirstMessageSent(false);
-                setShowSubscriptionPrompt(false);
-                setInChatAlert(null);
-              }}
-            >
-              🔄
-            </button>
+<button
+  className="new-chat-btn"
+  onClick={() => {
+    setMessages([
+      {
+        sender: "bot",
+        text: `Welcome ${username}! How can I help you today?${
+          freeMessagesLeft > 0 && timeLeft > 0
+            ? " (You have 5 free messages and 5 minutes)"
+            : ""
+        }`,
+      },
+    ]);
+    setIsFirstMessageSent(false);
+    setShowSubscriptionPrompt(false);
+    setInChatAlert(null);
+    setInput("");
+
+ 
+  }}
+>
+  🔄
+</button>
+
 
             <button
               className="close-btn"
@@ -426,9 +459,8 @@ function ChatBox() {
                 {messages.map((msg, index) => (
                   <div
                     key={index}
-                    className={`chat-message ${
-                      msg.sender === "user" ? "user" : "bot"
-                    }`}
+                    className={`chat-message ${msg.sender === "user" ? "user" : "bot"
+                      }`}
                   >
                     {msg.text}
                   </div>
