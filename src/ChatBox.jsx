@@ -302,7 +302,6 @@ function ChatBox() {
         <p>© 2025 Tech Diligents. All rights reserved.</p>
       </footer>
 
-      {/* CHAT BUTTON (If closed) */}
       {!isOpen && (
         <div className="chat-button-container">
           {showCartoon && (
@@ -322,7 +321,6 @@ function ChatBox() {
         </div>
       )}
 
-      {/* CHAT WINDOW (If open) */}
       {isOpen && (
         <div className="chat-window">
           <div className="chat-header">
@@ -333,7 +331,6 @@ function ChatBox() {
             />
             <span> Welcome To Astrology</span>
 
-            {/* 💡 Combined Timer and Message Count Display */}
             {isLoggedIn && !showLoginPopup && (
               <div
                 style={{
