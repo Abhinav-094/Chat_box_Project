@@ -388,8 +388,6 @@ function ChatBox() {
 >
   🔄
 </button>
-
-
             <button
               className="close-btn"
               onClick={() => {
@@ -483,8 +481,7 @@ function ChatBox() {
                 <input
                   type="text"
                   value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder={
+                  onChange={(e) => setInput(e.target.value)} placeholder={
                     freeMessagesLeft > 0 && timeLeft > 0
                       ? "Ask Your Question "
                       : "Limit reached. Subscribe to continue..."
@@ -494,19 +491,13 @@ function ChatBox() {
                     showSubscriptionPrompt ||
                     timeLeft === 0 ||
                     freeMessagesLeft <= 0
-                  }
-                />
-                <button
-                  onClick={handleSend}
-                  disabled={
+                  }/>
+                <button onClick={handleSend} disabled={
                     isBotTyping ||
                     showSubscriptionPrompt ||
                     timeLeft === 0 ||
                     freeMessagesLeft <= 0
-                  }
-                >
-                  Send
-                </button>
+                  }>Send</button>
               </div>
             </>
           )}
@@ -515,4 +506,4 @@ function ChatBox() {
     </>
   );
 }
-export default ChatBox;
+export default ChatBox; 
