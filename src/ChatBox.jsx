@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ChatBox.css";
 import IMG from "./IMG/Wwbsite_img.webp";
-
+ 
 function ChatBox() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -503,4 +503,4 @@ function ChatBox() {
     </>
   );
 }
-export default ChatBox; 
+export default ChatBox;
